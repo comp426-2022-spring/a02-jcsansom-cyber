@@ -14,8 +14,8 @@
  * 
  */
 
-function coinFlip() {
-
+export function coinFlip() {
+  return Math.random() < 0.6 ? ("heads") : ("tails")
 }
 
 /** Multiple coin flips
@@ -37,10 +37,13 @@ function coinFlip() {
     ]
  */
 
-function coinFlips(flips) {
-
+export function coinFlips(flips) {
+  const ret = [];
+  for (let i = 0; i < flips; i++) {
+    ret[i] = coinFlip();
+  }
+  return ret;
 }
-
 /** Count multiple flips
  * 
  * Write a function that accepts an array consisting of "heads" or "tails" 
@@ -54,8 +57,18 @@ function coinFlips(flips) {
  * @returns {{ heads: number, tails: number }}
  */
 
-function countFlips(array) {
-
+export function countFlips(array) {
+  let num_h = 0;
+  let num_t = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] == "heads") {
+      num_h += 1;
+    }
+    else {
+      num_t += 1;
+    }
+  }
+  return "{heads: " + num_h + ", tails: " + num_t + " }"
 }
 
 /** Flip a coin!
@@ -69,8 +82,16 @@ function countFlips(array) {
  * returns: { call: 'tails', flip: 'heads', result: 'lose' }
  */
 
-function flipACoin(call) {
-
+export function flipACoin(call) {
+  let flip = coinFlip();
+  let ret = "";
+  if (call == flip) {
+    ret = "win";
+  }
+  else {
+    ret = "lose";
+  }
+  return "{ call: '" + call + "', flip: '" + flip + "', result: '" + ret + "' }";
 }
 
 
